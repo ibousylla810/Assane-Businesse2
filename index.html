@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASSANE BUSINESS | Élégance Masculine</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="style.css">
+    <!-- EmailJS SDK (Pour les notifications) -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">ASSANE BUSINESS</div>
+            <div class="nav-icons">
+                <a href="#home" class="active">Accueil</a>
+                <a href="#catalog">Catalogue</a>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1>Le confort au masculin</h1>
+            <p>Sous-vêtements & Accessoires de qualité supérieure.</p>
+            <a href="#catalog" class="btn-cta">Voir la collection</a>
+        </div>
+    </header>
+
+    <!-- Filtres -->
+    <section class="filters container">
+        <button class="filter-btn active" onclick="filterProducts('all')">Tout</button>
+        <button class="filter-btn" onclick="filterProducts('boxers')">Boxers</button>
+        <button class="filter-btn" onclick="filterProducts('calecons')">Caleçons</button>
+        <button class="filter-btn" onclick="filterProducts('chaussettes')">Chaussettes</button>
+        <button class="filter-btn" onclick="filterProducts('accessoires')">Accessoires</button>
+    </section>
+
+    <!-- Catalogue -->
+    <section id="catalog" class="container product-grid">
+        <!-- Les produits seront injectés ici via JS -->
+    </section>
+
+    <!-- Modal Panier -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content cart-content">
+            <div class="modal-header">
+                <h2>Votre Panier</h2>
+                <span class="close" onclick="toggleCart()">&times;</span>
+            </div>
+            <div id="cart-items">
+                <!-- Items du panier ici -->
+            </div>
+            <div class="cart-footer">
+                <div class="total">Total: <span id="cart-total">0</span> FCFA</div>
+                <button onclick="openCheckout()" class="btn-checkout">Valider la commande</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Checkout (Formulaire) -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content checkout-content">
+            <div class="modal-header">
+                <h2>Finaliser la commande</h2>
+                <span class="close" onclick="closeCheckout()">&times;</span>
+            </div>
+            <form id="checkout-form" onsubmit="processOrder(event)">
+                
+                <h3>1. Informations Personnelles</h3>
+                <div class="form-group">
+                    <input type="text" id="nom" placeholder="Nom complet *" required>
+                    <input type="tel" id="tel" placeholder="Téléphone (+221...)" required>
+                </div>
+                
+                <h3>2. Livraison</h3>
+                <div class="form-group">
+                    <select id="region" required>
+                        <option value="">Choisir Région *</option>
+                        <option value="Dakar">Dakar</option>
+                        <option value="Thies">Thiès</option>
+                        <option value="Saint-Louis">Saint-Louis</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                    <input type="text" id="adresse" placeholder="Quartier, Ville, Repères *" required>
+                </div>
+
+                <h3>3. Paiement Mobile</h3>
+                <div class="payment-methods">
+                    <div class="payment-option" onclick="selectPayment('wave')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Wave_logo_2.png" alt="Wave" class="pay-logo">
+                        <p>Wave</p>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('om')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Orange_logo.svg/1200px-Orange_logo.svg.png" alt="OM" class="pay-logo">
+                        <p>Orange Money</p>
+                    </div>
+                </div>
+                <input type="hidden" id="payment-method" required>
+                <div id="payment-info" class="info-box hidden">
+                    <p>Envoyez le montant total au : <strong>77 XXX XX XX</strong></p>
+                    <p>Puis entrez votre numéro ci-dessous :</p>
+                    <input type="tel" id="payment-number" placeholder="Votre numéro de paiement">
+                </div>
+
+                <button type="submit" class="btn-confirm">CONFIRMER LA COMMANDE</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 ASSANE BUSINESS. Dakar, Sénégal.</p>
+            <div class="socials">
+                <i class="fab fa-whatsapp"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="products.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
